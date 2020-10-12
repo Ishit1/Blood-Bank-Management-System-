@@ -3,7 +3,7 @@ const router= new express.Router()
 const Donor= require('../models/donor')
 const BB= require('../models/bloodbank')
 const fast2sms = require('fast-two-sms')
-const key= "A6VmbRlGSTPFwQBWDY4ohnx0s3fgtqkIZzj9rXLdCUKN5pvc17Bvu45yge1wW7FhZJCMUGLONXfHmQoS";
+require('dotenv').config() 
 global.user={
     firstname:"",
     lastname:"",
@@ -41,7 +41,7 @@ router.post('/result',async (req,res)=>{
 })
 router.post('/sendsms',(req,res)=>{
     console.log(req.body)
-    fast2sms.sendMessage({authorization : key ,message : "\nHey "+ req.body.name+"\n"+user.firstname+" "+user.lastname+" is urgent need of "+user.bloodgroup+" blood type. \nWe think you can help them. We are providing their contact details below.\n"+user.phno+" "+user.email+" \n Be a hero. Save a life." ,numbers:[req.body.phno]})
+    fast2sms.sendMessage({authorization : process.env.SMS_KEY ,message : "\nHey "+ req.body.name+"\n"+user.firstname+" "+user.lastname+" is urgent need of "+user.bloodgroup+" blood type. \nWe think you can help them. We are providing their contact details below.\n"+user.phno+" "+user.email+" \n Be a hero. Save a life." ,numbers:[req.body.phno]})
     res.redirect('/')
 })
 module.exports= router

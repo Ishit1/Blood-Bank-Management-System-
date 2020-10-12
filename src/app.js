@@ -5,7 +5,7 @@ const donorRouter=require('./routers/donor')
 const BBregRouter= require('./routers/BBreg')
 const patientrouter=require('./routers/patient')
 var bodyParser = require('body-parser')
-
+require('dotenv').config() 
 
 const app=express() 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -28,7 +28,8 @@ app.get('/',(req,res)=>{
     res.render('index.html')
 })
 
-app.listen(3000,()=>{
-    console.log('server running at 3000')
+const port = process.env.PORT;
+app.listen(port,()=>{
+    console.log('server running at '+ port)
 })
 
