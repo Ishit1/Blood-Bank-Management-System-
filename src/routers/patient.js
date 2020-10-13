@@ -42,6 +42,6 @@ router.post('/result',async (req,res)=>{
 router.post('/sendsms',(req,res)=>{
     console.log(req.body)
     fast2sms.sendMessage({authorization : process.env.SMS_KEY ,message : "\nHey "+ req.body.name+"\n"+user.firstname+" "+user.lastname+" is urgent need of "+user.bloodgroup+" blood type. \nWe think you can help them. We are providing their contact details below.\n"+user.phno+" "+user.email+" \n Be a hero. Save a life." ,numbers:[req.body.phno]})
-    res.redirect('/')
+    res.redirect(307,'/result')
 })
 module.exports= router
